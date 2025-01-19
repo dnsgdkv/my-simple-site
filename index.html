@@ -11,10 +11,48 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            display: flex;
             height: 100vh;
+        }
+
+        /* Green menu on the left */
+        #menu {
+            background-color: green;
+            color: white;
+            width: 200px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Menu buttons */
+        .menu-button {
+            background-color: lightgreen;
+            border: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .menu-button:hover {
+            background-color: darkgreen;
+            color: white;
+        }
+
+        /* Content section */
+        #content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            width: 100%;
         }
 
         /* Yellow banner at the top */
@@ -24,6 +62,7 @@
             text-align: center;
             font-size: 2em;
             padding: 10px;
+            width: 100%;
         }
 
         /* Center the button on the page */
@@ -55,20 +94,37 @@
     </style>
 </head>
 <body>
-    <!-- Yellow banner -->
-    <div id="banner">
-        Hi Hi
+    <!-- Left menu -->
+    <div id="menu">
+        <button class="menu-button" onclick="changeButtonText('Click Me!')">Click Me!</button>
+        <button class="menu-button" onclick="changeButtonText('Clack Me!')">Clack Me!</button>
+        <button class="menu-button" onclick="changeButtonText('Cleck Me!')">Cleck Me!</button>
+        <button class="menu-button" onclick="changeButtonText('Clock Me!')">Clock Me!</button>
     </div>
 
-    <!-- Button in the center -->
-    <div class="button-container">
-        <button id="runButton">Click Me!</button>
-    </div>
+    <!-- Main content area -->
+    <div id="content">
+        <!-- Yellow banner -->
+        <div id="banner">
+            Hi Hi
+        </div>
 
-    <!-- Output below the button -->
-    <p id="output"></p>
+        <!-- Button in the center -->
+        <div class="button-container">
+            <button id="runButton">Click Me!</button>
+        </div>
+
+        <!-- Output below the button -->
+        <p id="output"></p>
+    </div>
 
     <script>
+        // Function to change the text of the main button
+        function changeButtonText(text) {
+            document.getElementById('runButton').textContent = text;
+        }
+
+        // Event listener for the main button click
         document.getElementById('runButton').onclick = function() {
             document.getElementById('output').textContent = 'Hello, World!';
         };
