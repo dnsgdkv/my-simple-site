@@ -3,258 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Futuristic Website</title>
+    <title>Futuristic Tech Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Global styles */
+        /* Global Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
         }
 
         body {
-            background-color: #1b1b1b;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding: 0;
+        }
+
+        /* Layout */
+        .container {
             display: flex;
+            justify-content: space-between;
+            align-items: stretch;
             height: 100vh;
-            color: white;
-            overflow: hidden;
         }
 
-        /* Left menu */
-        #menu {
-            background: linear-gradient(45deg, #0f0f0f, #303030);
-            width: 250px;
+        /* Left Navigation */
+        #nav {
+            width: 270px;
+            background-color: #333;
+            color: #fff;
+            padding: 40px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
+            justify-content: space-between;
             height: 100%;
-            position: fixed;
+            position: sticky;
             top: 0;
-            left: 0;
-            z-index: 10;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        /* Menu buttons */
-        .menu-button {
-            background: transparent;
-            color: #f8f8f8;
-            border: 2px solid #f8f8f8;
-            padding: 12px 20px;
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            cursor: pointer;
+        #nav h1 {
+            font-size: 2.2em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+
+        .nav-item {
+            background-color: #444;
+            padding: 15px 25px;
+            margin: 15px 0;
             border-radius: 50px;
-            width: 100%;
+            text-align: left;
+            cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            font-size: 1.1em;
         }
 
-        .menu-button:before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background: #f8f8f8;
-            transition: all 0.4s ease;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0;
+        .nav-item:hover {
+            background-color: #e6e6e6;
+            color: #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .menu-button:hover {
-            color: #1b1b1b;
-            border-color: #1b1b1b;
-        }
-
-        .menu-button:hover:before {
-            width: 0;
-            height: 0;
-        }
-
-        .menu-button span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .menu-button i {
-            margin-right: 10px;
-            font-size: 1.5em;
-        }
-
-        /* Content area */
-        #content {
+        /* Right Content */
+        .main-content {
             flex-grow: 1;
-            padding: 30px;
+            background: url('https://source.unsplash.com/1600x900/?technology') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
-            background-color: #222;
-            transition: all 0.5s ease;
-            margin-left: 250px; /* Space for the menu */
-            padding-top: 80px;
-        }
-
-        /* Banner text */
-        #banner {
-            background-color: #008CBA;
+            padding: 30px;
             color: white;
-            text-align: center;
-            font-size: 2.5em;
-            padding: 20px;
-            width: 100%;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            margin-bottom: 40px;
-        }
-
-        /* Main button */
-        .button-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        #runButton {
-            background: #4caf50;
-            color: white;
-            font-size: 2.5em;
-            padding: 20px 50px;
-            border: none;
-            cursor: pointer;
-            border-radius: 50px;
-            transition: background 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        #runButton:hover {
-            background: #45a049;
-        }
-
-        #output {
-            font-size: 1.5em;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        #output.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Animations */
-        @keyframes buttonFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Text that appears when a menu button is clicked */
-        .dynamic-text {
-            font-size: 1.7em;
-            color: #f8f8f8;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: buttonFadeIn 0.5s ease forwards;
-        }
-
-        /* Adding icons to buttons */
-        .fa {
-            font-size: 1.5em;
-            color: #f8f8f8;
-        }
-
-        /* Footer */
-        #footer {
-            position: absolute;
-            bottom: 10px;
-            color: #555;
-            font-size: 0.9em;
+        /* Title and Subtitle */
+        .hero-text {
             text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            margin-bottom: 40px;
+            transition: opacity 0.6s ease;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5em;
+            font-weight: 600;
+        }
+
+        .hero-text p {
+            font-size: 1.5em;
+            font-weight: 300;
+        }
+
+        /* Buttons */
+        .btn {
+            background-color: #008CBA;
+            padding: 15px 40px;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .btn:hover {
+            background-color: #005f73;
+            transform: translateY(-5px);
+        }
+
+        /* Hover Animation */
+        .nav-item, .btn {
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            #nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 20px;
+                background-color: #333;
+            }
+
+            .main-content {
+                height: auto;
+                background: url('https://source.unsplash.com/1600x900/?tech') no-repeat center center/cover;
+                padding: 20px;
+            }
         }
     </style>
-
-    <!-- Link to Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-    <!-- Left menu -->
-    <div id="menu">
-        <button class="menu-button" onclick="changeButtonText('Activate Quantum Drive!')">
-            <i class="fas fa-rocket"></i> Launch Mission
-        </button>
-        <button class="menu-button" onclick="changeButtonText('Deploy Hologram!')">
-            <i class="fas fa-cogs"></i> Deploy Systems
-        </button>
-        <button class="menu-button" onclick="changeButtonText('Unlock Virtual Reality!')">
-            <i class="fas fa-vr-cardboard"></i> VR Mode
-        </button>
-        <button class="menu-button" onclick="changeButtonText('Engage Hyperdrive!')">
-            <i class="fas fa-space-shuttle"></i> Hyperdrive
-        </button>
-        <button class="menu-button" onclick="changeButtonText('Commence Virtual Experiment!')">
-            <i class="fas fa-flask"></i> Experiment
-        </button>
-        <button class="menu-button" onclick="changeButtonText('Activate AI Protocol!')">
-            <i class="fas fa-brain"></i> AI Mode
-        </button>
-    </div>
-
-    <!-- Main content -->
-    <div id="content">
-        <!-- Banner -->
-        <div id="banner">Welcome to the Future</div>
-
-        <!-- Main Button -->
-        <div class="button-container">
-            <button id="runButton">Launch Mission</button>
+    <div class="container">
+        <!-- Left Navigation -->
+        <div id="nav">
+            <h1>TechExperience</h1>
+            <div class="nav-item">Explore New Technologies</div>
+            <div class="nav-item">Join the Revolution</div>
+            <div class="nav-item">Our Products</div>
+            <div class="nav-item">Connect with Us</div>
         </div>
 
-        <!-- Dynamic text area -->
-        <div id="output" class="dynamic-text"></div>
-
-        <!-- Footer -->
-        <div id="footer">Powered by Quantum Technologies</div>
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="hero-text">
+                <h1>Welcome to the Future of Technology</h1>
+                <p>Explore the groundbreaking innovations that are transforming our world.</p>
+            </div>
+            <button class="btn">Discover More</button>
+        </div>
     </div>
 
     <script>
-        let outputText = document.getElementById('output');
-        let runButton = document.getElementById('runButton');
+        // Smooth Scroll to Section (for future additions)
+        const navItems = document.querySelectorAll('.nav-item');
+        const btn = document.querySelector('.btn');
+        const heroText = document.querySelector('.hero-text');
 
-        // Function to change the text of the main button and show new dynamic text
-        function changeButtonText(text) {
-            runButton.textContent = text;
-            outputText.classList.remove('visible');
-            outputText.innerHTML = 'Welcome to the world of innovation. <br> Prepare to witness the impossible!';
+        navItems.forEach((item) => {
+            item.addEventListener('click', () => {
+                heroText.style.opacity = 0;
+                setTimeout(() => {
+                    heroText.style.opacity = 1;
+                    heroText.innerHTML = `<h1>New Section Explored</h1><p>You just activated a new area of our tech universe.</p>`;
+                }, 600);
+            });
+        });
+
+        // Button hover effect
+        btn.addEventListener('click', () => {
+            btn.innerText = 'Exploring...';
             setTimeout(() => {
-                outputText.classList.add('visible');
-            }, 500);
-        }
-
-        // Event listener for the main button click
-        runButton.onclick = function() {
-            outputText.innerHTML = 'Mission accomplished. Ready for the next challenge.';
-            outputText.classList.add('visible');
-        };
+                btn.innerText = 'Discover More';
+            }, 2000);
+        });
     </script>
+
 </body>
 </html>
