@@ -3,130 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Website</title>
+    <title>Futuristic Website</title>
     <style>
-        /* Set background color to red */
-        body {
-            background-color: red;
-            font-family: Arial, sans-serif;
+        /* Global styles */
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            height: 100vh;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
 
-        /* Green menu on the left */
-        #menu {
-            background-color: green;
+        body {
+            background-color: #1b1b1b;
+            display: flex;
+            height: 100vh;
             color: white;
-            width: 200px;
+            overflow: hidden;
+        }
+
+        /* Left menu */
+        #menu {
+            background: linear-gradient(45deg, #0f0f0f, #303030);
+            width: 250px;
             display: flex;
             flex-direction: column;
-            padding: 20px;
-            box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         /* Menu buttons */
         .menu-button {
-            background-color: lightgreen;
-            border: none;
-            padding: 15px;
-            margin-bottom: 10px;
-            font-size: 1.2em;
+            background: transparent;
+            color: #f8f8f8;
+            border: 2px solid #f8f8f8;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
             cursor: pointer;
-            border-radius: 5px;
-            text-align: center;
+            border-radius: 50px;
+            width: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-button:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: #f8f8f8;
+            transition: all 0.4s ease;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
         }
 
         .menu-button:hover {
-            background-color: darkgreen;
-            color: white;
+            color: #1b1b1b;
+            border-color: #1b1b1b;
         }
 
-        /* Content section */
+        .menu-button:hover:before {
+            width: 0;
+            height: 0;
+        }
+
+        .menu-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-button i {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+
+        /* Content area */
         #content {
             flex-grow: 1;
+            padding: 30px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-            width: 100%;
+            position: relative;
+            background-color: #222;
+            transition: all 0.5s ease;
+            margin-left: 250px; /* Space for the menu */
+            padding-top: 80px;
         }
 
-        /* Yellow banner at the top */
+        /* Banner text */
         #banner {
-            background-color: yellow;
-            color: black;
+            background-color: #008CBA;
+            color: white;
             text-align: center;
-            font-size: 2em;
-            padding: 10px;
+            font-size: 2.5em;
+            padding: 20px;
             width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-bottom: 40px;
         }
 
-        /* Center the button on the page */
+        /* Main button */
         .button-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-grow: 1;
+            margin-bottom: 20px;
         }
 
         #runButton {
-            background-color: pink;
-            font-size: 3em;
-            padding: 20px 40px;
+            background: #4caf50;
+            color: white;
+            font-size: 2.5em;
+            padding: 20px 50px;
             border: none;
             cursor: pointer;
-            border-radius: 10px;
+            border-radius: 50px;
+            transition: background 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         #runButton:hover {
-            background-color: hotpink;
+            background: #45a049;
         }
 
         #output {
-            color: white;
-            text-align: center;
             font-size: 1.5em;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        #output.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animations */
+        @keyframes buttonFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Text that appears when a menu button is clicked */
+        .dynamic-text {
+            font-size: 1.7em;
+            color: #f8f8f8;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: buttonFadeIn 0.5s ease forwards;
+        }
+
+        /* Adding icons to buttons */
+        .fa {
+            font-size: 1.5em;
+            color: #f8f8f8;
+        }
+
+        /* Footer */
+        #footer {
+            position: absolute;
+            bottom: 10px;
+            color: #555;
+            font-size: 0.9em;
+            text-align: center;
         }
     </style>
+
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+
     <!-- Left menu -->
     <div id="menu">
-        <button class="menu-button" onclick="changeButtonText('Click Me!')">Click Me!</button>
-        <button class="menu-button" onclick="changeButtonText('Clack Me!')">Clack Me!</button>
-        <button class="menu-button" onclick="changeButtonText('Cleck Me!')">Cleck Me!</button>
-        <button class="menu-button" onclick="changeButtonText('Clock Me!')">Clock Me!</button>
+        <button class="menu-button" onclick="changeButtonText('Activate Quantum Drive!')">
+            <i class="fas fa-rocket"></i> Launch Mission
+        </button>
+        <button class="menu-button" onclick="changeButtonText('Deploy Hologram!')">
+            <i class="fas fa-cogs"></i> Deploy Systems
+        </button>
+        <button class="menu-button" onclick="changeButtonText('Unlock Virtual Reality!')">
+            <i class="fas fa-vr-cardboard"></i> VR Mode
+        </button>
+        <button class="menu-button" onclick="changeButtonText('Engage Hyperdrive!')">
+            <i class="fas fa-space-shuttle"></i> Hyperdrive
+        </button>
+        <button class="menu-button" onclick="changeButtonText('Commence Virtual Experiment!')">
+            <i class="fas fa-flask"></i> Experiment
+        </button>
+        <button class="menu-button" onclick="changeButtonText('Activate AI Protocol!')">
+            <i class="fas fa-brain"></i> AI Mode
+        </button>
     </div>
 
-    <!-- Main content area -->
+    <!-- Main content -->
     <div id="content">
-        <!-- Yellow banner -->
-        <div id="banner">
-            Hi Hi
-        </div>
+        <!-- Banner -->
+        <div id="banner">Welcome to the Future</div>
 
-        <!-- Button in the center -->
+        <!-- Main Button -->
         <div class="button-container">
-            <button id="runButton">Click Me!</button>
+            <button id="runButton">Launch Mission</button>
         </div>
 
-        <!-- Output below the button -->
-        <p id="output"></p>
+        <!-- Dynamic text area -->
+        <div id="output" class="dynamic-text"></div>
+
+        <!-- Footer -->
+        <div id="footer">Powered by Quantum Technologies</div>
     </div>
 
     <script>
-        // Function to change the text of the main button
+        let outputText = document.getElementById('output');
+        let runButton = document.getElementById('runButton');
+
+        // Function to change the text of the main button and show new dynamic text
         function changeButtonText(text) {
-            document.getElementById('runButton').textContent = text;
+            runButton.textContent = text;
+            outputText.classList.remove('visible');
+            outputText.innerHTML = 'Welcome to the world of innovation. <br> Prepare to witness the impossible!';
+            setTimeout(() => {
+                outputText.classList.add('visible');
+            }, 500);
         }
 
         // Event listener for the main button click
-        document.getElementById('runButton').onclick = function() {
-            document.getElementById('output').textContent = 'Hello, World!';
+        runButton.onclick = function() {
+            outputText.innerHTML = 'Mission accomplished. Ready for the next challenge.';
+            outputText.classList.add('visible');
         };
     </script>
 </body>
